@@ -5,8 +5,8 @@
   "main": "api/server.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
-    "start-dev": "pm2-runtime start ecosystem.config.js --env development",
+    "start-dev": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "pm2-runtime start ecosystem.config.js --env development",
     "build": "tsc ./api/server.ts",
     "build-client": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
