@@ -41,6 +41,7 @@ var fastify_cors_1 = require("fastify-cors");
 // eslint-disable-next-line import/no-named-default
 var Fuse = require("fuse.js/dist/fuse.basic");
 var mdi = require("@mdi/js");
+var port = process.env.PORT || process.env.NODE_PORT || 3000;
 var prepareName = function (name) {
     return name.slice(3)
         .replace(/\w(?=(([A-Z])))/g, function (str) { return str + "-"; })
@@ -81,9 +82,10 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, server.listen(process.env.PORT || 3000)];
+                return [4 /*yield*/, server.listen(port)];
             case 1:
                 _a.sent();
+                console.log('Server listens at port:', port);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();

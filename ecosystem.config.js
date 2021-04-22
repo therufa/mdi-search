@@ -4,11 +4,13 @@ module.exports = {
     script: './api/server.js',
     instances: 'max',
     env: {
-      NODE_ENV: 'development',
-      PORT: 3000
+      NODE_ENV: 'development'
     },
     env_production: {
       NODE_ENV: 'production'
+    },
+    env_development: {
+      NODE_PORT: 3000
     }
   }]
 }
