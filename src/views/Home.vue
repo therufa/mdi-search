@@ -14,13 +14,21 @@
           v-model="search"
         />
         <div class="absolute inset-y-0 right-0 p-3 pr-5 pl-3 flex items-center pointer-events-none">
-          <mdicon name="magnify" />
+          <mdicon :name="loading ? 'loading' : 'magnify'" :spin="loading" />
         </div>
       </div>
 
       <div class="bg-white block w-full p-3 sm:text-sm border-gray-300 rounded-md shadow-sm">
         <div class="max-w-7xl mx-auto py-6 px-4 text-center sm:px-6 lg:px-8 lg:py-12">
-          <IconGrid :icons="icons" />
+          <div
+            v-if="!matches.length"
+            class="align-text-top"
+          >
+            No matches
+            <mdicon name="emoticon-sad-outline" class="inline-block" />
+          </div>
+
+          <IconGrid :icons="matches" />
         </div>
       </div>
 
@@ -29,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, onMounted, ref, watch } from 'vue'
 import IconGrid from '@/components/IconGrid.vue'
 
 export default defineComponent({
@@ -38,18 +46,41 @@ export default defineComponent({
   },
   setup () {
     const search = ref('')
-    const icons = ref([])
+    const matches = ref([])
+    const loading = ref(false)
+    const debounceInterval = 300
 
-    watch(search, async () => {
-      const response = await fetch('http://localhost:3000/?search=' + search.value)
-      const { data } = await response.json()
+    let debounceTimer
+    const getResults = searchVal => {
+      clearTimeout(debounceTimer)
 
-      icons.value = data.icons.map(entry => ({ name: entry.item[0], path: entry.item[1] }))
+      const interval = (
+        debounceInterval * Math.abs(Math.log(1 / search.value.length))
+      ) || debounceInterval
+
+      loading.value = true
+      debounceTimer = setTimeout(
+        async () => {
+          const response = await fetch('http://localhost:3000/?search=' + searchVal)
+          const { data } = await response.json()
+
+          matches.value = data.matches
+            .map(entry => ({ name: entry.item[0], path: entry.item[1] }))
+
+          loading.value = false
+        }, interval)
+    }
+
+    onMounted(() => {
+      getResults('home')
     })
+
+    watch(search, () => getResults(search.value))
 
     return {
       search,
-      icons
+      matches,
+      loading
     }
   }
 })

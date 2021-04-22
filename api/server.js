@@ -41,22 +41,35 @@ var fastify_cors_1 = require("fastify-cors");
 // eslint-disable-next-line import/no-named-default
 var Fuse = require("fuse.js");
 var mdi = require("@mdi/js");
-var mdiIcons = Object.entries(mdi);
-var fuseOpts = { keys: ['0'] };
+var prepareName = function (name) {
+    return name.slice(3)
+        .replace(/\w(?=(([A-Z])))/g, function (str) { return str + "-"; })
+        .toLowerCase();
+};
+var mdiIcons = Object.entries(mdi).map(function (_a) {
+    var name = _a[0], path = _a[1];
+    return [prepareName(name), path];
+});
+var fuseOpts = {
+    keys: ['0'],
+    includeScore: true,
+    threshold: 0.4
+};
 var fuseIndex = Fuse.createIndex(fuseOpts.keys, mdiIcons);
 var fuse = new Fuse(mdiIcons, fuseOpts, fuseIndex);
 var server = fastify_1["default"]({});
 server.register(fastify_cors_1["default"], {
-    origin: 'http://localhost:8081'
+    origin: '*'
 });
 server.get('/', function (request) { return __awaiter(void 0, void 0, void 0, function () {
-    var search;
+    var search, searchTerm;
     return __generator(this, function (_a) {
         search = request.query.search;
+        searchTerm = decodeURIComponent(search);
         return [2 /*return*/, {
                 data: {
-                    search: search,
-                    icons: fuse.search(search).slice(0, 30)
+                    searchTerm: searchTerm,
+                    matches: fuse.search(searchTerm).slice(0, 50)
                 },
                 error: null
             }];

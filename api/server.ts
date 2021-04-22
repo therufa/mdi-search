@@ -5,8 +5,16 @@ import { Server, IncomingMessage, ServerResponse } from 'http'
 import * as Fuse from 'fuse.js'
 import * as mdi from '@mdi/js'
 
-const mdiIcons = Object.entries(mdi)
-const fuseOpts = { keys: ['0'] }
+const prepareName = (name: string) =>
+  name.slice(3)
+    .replace(/\w(?=(([A-Z])))/g, (str) => `${str}-`)
+    .toLowerCase()
+const mdiIcons = Object.entries(mdi).map(([name, path]) => [prepareName(name), path])
+const fuseOpts = {
+  keys: ['0'],
+  includeScore: true,
+  threshold: 0.4
+}
 const fuseIndex = Fuse.createIndex(fuseOpts.keys, mdiIcons)
 const fuse = new Fuse(mdiIcons, fuseOpts, fuseIndex)
 
@@ -18,16 +26,17 @@ interface RequestGeneric extends RequestGenericInterface {
 }
 
 server.register(fastifyCors, {
-  origin: 'http://localhost:8081'
+  origin: '*'
 })
 
 server.get<RequestGeneric>('/', async (request) => {
   const { search } = request.query
+  const searchTerm = decodeURIComponent(search)
 
   return {
     data: {
-      search,
-      icons: fuse.search(search).slice(0, 30)
+      searchTerm,
+      matches: fuse.search(searchTerm).slice(0, 50)
     },
     error: null
   }
@@ -35,7 +44,7 @@ server.get<RequestGeneric>('/', async (request) => {
 
 const start = async () => {
   try {
-    await server.listen(3000)
+    await server.listen(process.env.PORT || 3000)
   } catch (err) {
     server.log.error(err)
     process.exit(1)
