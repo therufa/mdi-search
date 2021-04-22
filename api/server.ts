@@ -45,7 +45,7 @@ server.get<RequestGeneric>('/', async (request) => {
 const start = async () => {
   try {
     const port = process.env.PORT || 3000
-    await server.listen(port)
+    await server.listen(port, '0.0.0.0')
     console.log('Server listens at port:', port)
   } catch (err) {
     server.log.error(err)
