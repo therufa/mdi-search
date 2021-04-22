@@ -1,7 +1,11 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <div class="min-h-screen bg-gray-100">
-    <Disclosure as="nav" class="bg-white shadow-sm" v-slot="{ open }">
+    <Disclosure
+      as="nav"
+      class="bg-white shadow-sm"
+      v-slot="{ open }"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex">
@@ -18,8 +22,18 @@
             <!-- Mobile menu button -->
             <DisclosureButton class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span class="sr-only">Open main menu</span>
-              <mdicon name="menu" v-if="!open" class="block h-6 w-6" aria-hidden="true" />
-              <mdicon name="close" v-else class="block h-6 w-6" aria-hidden="true" />
+              <mdicon
+                name="menu"
+                v-if="!open"
+                class="block h-6 w-6"
+                aria-hidden="true"
+              />
+              <mdicon
+                name="close"
+                v-else
+                class="block h-6 w-6"
+                aria-hidden="true"
+              />
             </DisclosureButton>
           </div>
         </div>
@@ -30,10 +44,17 @@
       <RouterView />
     </div>
 
-    <div class="p-10 pt-1 text-sm">
-      Inspired by <a href="https://materialdesignicons.com" class="underline">materialdesignicons.com</a> |
-      This app is created <a href="https:/github.com/therufa" class="underline">@therufa</a> |
-      For the sole purpose to quickly search material design icons.
+    <div class="max-w-7xl mx-auto py-6 pt-1 px-4 text-center text-sm sm:px-6 lg:px-8 lg:py-12 lg:pt-1">
+      Inspired by <a
+        href="https://materialdesignicons.com"
+        class="underline"
+      >materialdesignicons.com</a> |
+      This app is created <a
+        href="https:/github.com/therufa"
+        class="underline"
+      >@therufa</a> |
+      For the sole purpose to quickly find material design icons from in the
+      <a href="https://github.com/Templarian/MaterialDesign-JS">@mdi/js</a> collection.
     </div>
   </div>
 </template>
