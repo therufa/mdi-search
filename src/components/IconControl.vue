@@ -7,6 +7,7 @@
           overflow-hidden relative cursor-pointer
           rounded-md
         "
+        @click="handleClick"
   >
     <div
       class="mdi mx-auto inline-block text-center pt-4 mb-12"
@@ -33,13 +34,28 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import copy from 'copy-to-clipboard'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   props: {
     icon: { type: Object, required: true }
   },
-  setup () {
-    return {}
+  setup (props) {
+    const store = useStore()
+
+    function handleClick () {
+      copy(props.icon.name)
+
+      store.dispatch('toast', {
+        title: props.icon.name,
+        text: 'copied to clipboard'
+      })
+    }
+
+    return {
+      handleClick
+    }
   }
 })
 </script>

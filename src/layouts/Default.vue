@@ -6,18 +6,13 @@
         <div class="flex justify-between h-16">
           <div class="flex">
             <div class="flex-shrink-0 flex items-center">
-              Material Design Icons
+              Faster MDI Search
             </div>
             <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
               <!-- <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300', 'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a> -->
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
-            <!-- <button class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button> -->
-
           </div>
           <div class="-mr-2 flex items-center sm:hidden">
             <!-- Mobile menu button -->
@@ -33,6 +28,12 @@
 
     <div class="py-10">
       <RouterView />
+    </div>
+
+    <div class="p-10 pt-1 text-sm">
+      Inspired by <a href="https://materialdesignicons.com" class="underline">materialdesignicons.com</a> |
+      This app is created <a href="https:/github.com/therufa" class="underline">@therufa</a> |
+      For the sole purpose to quickly search material design icons.
     </div>
   </div>
 </template>
