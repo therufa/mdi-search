@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && tsc ./api/server.ts --outdir ./dist/api",
+    "start": "pm2 start ./api/server.js",
+    "build": "tsc ./api/server.ts",
+    "build-client": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -21,6 +23,7 @@
     "fuse.js": "^6.4.6",
     "mdi-vue": "^3.0.5",
     "node-notifier": "^9.0.1",
+    "pm2": "^4.5.6",
     "postcss": "^7",
     "register-service-worker": "^1.7.1",
     "ssri": "^8.0.1",

@@ -32,12 +32,12 @@
   </div>
 </template>
 
-<script>
-import { computed, ref } from 'vue'
+<script lang="ts">
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
-  setup () {
+  setup (): unknown {
     const store = useStore()
     const toast = computed(() => store.state.toast)
 
