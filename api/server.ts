@@ -2,7 +2,7 @@ import fastify, { FastifyInstance, RequestGenericInterface } from 'fastify'
 import fastifyCors from 'fastify-cors'
 import { Server, IncomingMessage, ServerResponse } from 'http'
 // eslint-disable-next-line import/no-named-default
-import * as Fuse from 'fuse.js'
+import * as Fuse from 'fuse.js/dist/fuse.basic'
 import * as mdi from '@mdi/js'
 
 const prepareName = (name: string) =>

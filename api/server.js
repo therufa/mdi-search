@@ -39,7 +39,7 @@ exports.__esModule = true;
 var fastify_1 = require("fastify");
 var fastify_cors_1 = require("fastify-cors");
 // eslint-disable-next-line import/no-named-default
-var Fuse = require("fuse.js");
+var Fuse = require("fuse.js/dist/fuse.basic");
 var mdi = require("@mdi/js");
 var prepareName = function (name) {
     return name.slice(3)
@@ -81,7 +81,7 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, server.listen(3000)];
+                return [4 /*yield*/, server.listen(process.env.PORT || 3000)];
             case 1:
                 _a.sent();
                 return [3 /*break*/, 3];
