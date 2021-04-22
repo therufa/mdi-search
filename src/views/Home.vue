@@ -61,7 +61,7 @@ export default defineComponent({
       loading.value = true
       debounceTimer = setTimeout(
         async () => {
-          const response = await fetch('http://localhost:3000/?search=' + searchVal)
+          const response = await fetch('https://therufa-mdi-api.herokuapp.com/?search=' + searchVal)
           const { data } = await response.json()
 
           matches.value = data.matches
