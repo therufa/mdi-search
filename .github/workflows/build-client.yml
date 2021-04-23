@@ -36,4 +36,3 @@ jobs:
       - name: build client
         run: |
           yarn build-client
-          mv dist docs
