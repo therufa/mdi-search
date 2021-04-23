@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.442e16256854a69ae3a268476459499e.js"
+  "/mdi-search/precache-manifest.12d01b17888a7571e14182bea3a2a46d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mdi-web"});
